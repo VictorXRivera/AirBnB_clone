@@ -8,35 +8,28 @@ Victor Rivera, Elnur Sultanov, Matthew Feliciano\
 - You compile it with this command: 
 - insert command here
 ## Example
-./console.py
-(hbnb) help
-
-Documented commands (type help "topic"):
-_______________________________________
-EOF  help  quit
-
-(hbnb) 
-(hbnb) 
-(hbnb) quit
-$
-- __or__
-$ echo "help" | ./console.py
-(hbnb)
-
-Documented commands (type help "topic"):
-_______________________________________
-EOF  help  quit
-(hbnb) 
-$
-$ cat test_help
-help
-$
-$ cat test_help | ./console.py
-(hbnb)
-
-Documented commands (type help "topic"):
-_______________________________________
-EOF  help  quit
+./console.py\
+(hbnb) help\
+Documented commands (type help "topic"):\
+EOF  help  quit\
+(hbnb)\
+(hbnb)\ 
+(hbnb) quit\
+$\
+- __or__\
+$ echo "help" | ./console.py\
+(hbnb)\
+Documented commands (type help "topic"):\
+EOF  help  quit\
+(hbnb)\ 
+$\
+$ cat test_help\
+help\
+$\
+$ cat test_help | ./console.py\
+(hbnb)\
+Documented commands (type help "topic"):\
+EOF  help  quit\
 (hbnb) 
 $
 ---
