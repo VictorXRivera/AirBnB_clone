@@ -13,16 +13,16 @@ Victor Rivera, Elnur Sultanov, Matthew Feliciano\
 Documented commands (type help "topic"):\
 EOF  help  quit\
 (hbnb)\
-(hbnb)\ 
+(hbnb)\
 (hbnb) quit\
-$\
-## __or__
+$
+---
 $ echo "help" | ./console.py\
 (hbnb)\
 Documented commands (type help "topic"):\
 EOF  help  quit\
-(hbnb)\ 
-$\
+(hbnb)\
+$
 $ cat test_help\
 help\
 $\
@@ -30,7 +30,7 @@ $ cat test_help | ./console.py\
 (hbnb)\
 Documented commands (type help "topic"):\
 EOF  help  quit\
-(hbnb) 
+(hbnb)\
 $
 ---
 # Files:
