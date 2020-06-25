@@ -11,8 +11,8 @@ Victor Rivera, Elnur Sultanov, Matthew Feliciano\
 ./console.py
 (hbnb) help
 
-Documented commands (type help <topic>):
-========================================
+Documented commands (type help "topic"):
+_______________________________________
 EOF  help  quit
 
 (hbnb) 
@@ -23,8 +23,8 @@ $
 $ echo "help" | ./console.py
 (hbnb)
 
-Documented commands (type help <topic>):
-========================================
+Documented commands (type help "topic"):
+_______________________________________
 EOF  help  quit
 (hbnb) 
 $
@@ -34,8 +34,8 @@ $
 $ cat test_help | ./console.py
 (hbnb)
 
-Documented commands (type help <topic>):
-========================================
+Documented commands (type help "topic"):
+_______________________________________
 EOF  help  quit
 (hbnb) 
 $
