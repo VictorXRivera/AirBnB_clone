@@ -16,7 +16,7 @@ EOF  help  quit\
 (hbnb)\ 
 (hbnb) quit\
 $\
-# __or__
+## __or__
 $ echo "help" | ./console.py\
 (hbnb)\
 Documented commands (type help "topic"):\
