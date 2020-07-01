@@ -1,26 +1,31 @@
 #!/usr/bin/python3
 """ Custom hbnb console """
-import cmd, sys
+import cmd
 
 class HBNBCommand(cmd.Cmd):
     """ Class HBNBCommand """
     prompt = '(hbnb) '
 
     def do_quit(self, inp):
-        """ Quit command"""
+        """ Quit command """
         return True
+
+    def do_EOF(self, inp):
+        """ Actual exiting """
+        return True
+
+    def emptyline(self):
+        """ Empty line edgecase? """
+        pass
 
     def help_quit(self):
         """ Description of cmd """
-        print('Quit command to exit the program')
+        print('Quit command to exit the program\n')
     
     def default(self, inp):
         """ Quit function """
         if inp == 'quit':
             return self.do_quit(inp)
-
-    do_EOF = do_quit
-    help_EOF = help_quit
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
