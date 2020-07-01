@@ -34,10 +34,14 @@ class FileStorage:
         '''reload: deserializess the JSON file to __objects
         '''
         classes = {'BaseModel': BaseModel}
-        with open(self.__file_path, 'r') as a_file:
-            obj_dict = json.load(a_file)
-        for key, val in obj_dict.items():
-            if val["__class__"] in classes.key():
-                FileStorage.__objects[key] = classes[val["__class__"]](**val)
-            else:
-                FileStorage.__objects[key] = None
+        
+        try:
+            with open(FileStorage.__file_path, 'r') as a_file:
+                obj_dict = json.load(a_file)
+            for key, val in obj_dict.items():
+                if val["__class__"] in classes.key():
+                    FileStorage.__objects[key] = classes[val["__class__"]](**val)
+                else:
+                    FileStorage.__objects[key] = None
+        except:
+            pass
