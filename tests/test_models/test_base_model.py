@@ -1,14 +1,24 @@
 #!/usr/bin/python3
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
+from datetime import datetime as dt
+from uuid import UUID
+import unittest
 
-my_model = BaseModel()
-my_model.name = "Holberton"
-my_model.my_number = 89
-print(my_model)
-my_model.save()
-print(my_model)
-my_model_json = my_model.to_dict()
-print(my_model_json)
-print("JSON of my_model:")
-for key in my_model_json.keys():
-    print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
+
+class Test_base_model(unittest.TestCase):
+
+    def setUp(self):
+        print("setUp")
+
+    def tearDown(self):
+        pass
+        print("tearDown")
+
+    def test_id(self):
+        bm = self.name
+        self.assertIsInstance(bm.id, str)
+        self.assertIsInstance(UUID(base.id), UUID)
+
+if __name__ == '__main__':
+    unittest.main()
