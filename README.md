@@ -1,5 +1,5 @@
 **AirBnB_clone**\
-Victor Rivera, Elnur Sultanov, Matthew Feliciano\
+Victor Rivera, Matthew Feliciano\
 06/25/20
 ---
 
