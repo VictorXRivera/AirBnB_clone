@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''file_storage: serializes/deserializes to/from a JSON file'''
+""" file_storage: serializes/deserializes to/from a JSON file """
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -10,25 +10,21 @@ import json
 
 
 class FileStorage:
-    '''FileStorage: serializes/deserializes to/from a JSON file to instances
-    '''
+    """ FileStorage: serializes/deserializes to/from a JSON file to instances """
 
     __file_path = "file.json"
     __objects = {}
 
     def all(self):
-        '''all: returns the dictionary __objects
-        '''
+        """ all: returns the dictionary __objects """
         return self.__objects
 
     def new(self, obj):
-        '''new: sets in __objects the obj with key <obj class name>.id
-        '''
+        """ new: sets in __objects the obj with key <obj class name>.id """
         self.__objects[type(obj).__name__ + '.' + obj.id] = obj
 
     def save(self):
-        '''save: serializes __objects to the JSON file
-        '''
+        """ save: serializes __objects to the JSON file """
         obj_dict = {}
         for key, value in self.__objects.items():
             obj_dict.append(value.todict())
