@@ -31,12 +31,21 @@ class FileStorage:
         classes = {'BaseModel': BaseModel}
         
         try:
+<<<<<<< HEAD
             with open(self.__file_path, 'r') as a_file:
+=======
+            with open(FileStorage.__file_path, 'r') as a_file:
+>>>>>>> master
                 obj_dict = json.load(a_file)
             for key, val in obj_dict.items():
                 if val["__class__"] in classes.key():
                     FileStorage.__objects[key] = classes[val["__class__"]](**val)
+<<<<<<< HEAD
             else:
                 FileStorage.__objects[key] = None
+=======
+                else:
+                    FileStorage.__objects[key] = None
+>>>>>>> master
         except:
             pass
