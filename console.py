@@ -1,9 +1,16 @@
 #!/usr/bin/python3
 """ Custom hbnb console """
+from models.user import User
 import cmd
 
 class HBNBCommand(cmd.Cmd):
     """ Class HBNBCommand """
+    classes = {'BaseModel' : BaseModel, 'User' : User,
+               'State' : State
+               'City' : City
+               'Amenity' : Amenity
+               'Place': Place
+               'Review' : Review}
     prompt = '(hbnb) '
 
     def do_quit(self, inp):
