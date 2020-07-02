@@ -3,18 +3,17 @@
 from models.user import User
 import cmd
 
+
 class HBNBCommand(cmd.Cmd):
     """ Class HBNBCommand """
-    classes = {'BaseModel' : BaseModel, 'User' : User,
-               'State' : State
-               'City' : City
-               'Amenity' : Amenity
-               'Place': Place
-               'Review' : Review}
+
+    classes = {'BaseModel': BaseModel, 'User': User,
+               'State': State,
+               'City': City,
+               'Amenity': Amenity,
+               'Place': Place,
+               'Review': Review}
     prompt = '(hbnb) '
-    classes = {"BaseModel": BaseModel, "User": User, "State": State,
-               "City": City, "Amenity": Amenity, "Place": Place,
-               "Review": Review}
 
     def do_quit(self, inp):
         """ Quit command """
@@ -23,7 +22,7 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, inp):
         """ Actual exiting """
         return True
-    
+
     def emptyline(self):
         """ Empty line edgecase? """
         pass
@@ -44,24 +43,24 @@ class HBNBCommand(cmd.Cmd):
 
     def help_create(self):
         """ Description on create """
-        print('Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id\n')
+        print('Creates new instance of BaseModel, saves it, and prints id\n')
 
     def help_show(self):
         """ Desc. on show """
-        print('Prints the string representation of an instance based on the class name and id\n')
+        print('Prints string rep of an instance based on class name and id\n')
 
     def help_destroy(self):
         """ Desc. on destroy """
-        print('Deletes an instance based on the class name and id (save the change into the JSON file\n')
+        print('Deletes an instance based on the class name and id\n')
 
     def help_all(self):
         """ Desc. on all """
-        print('Prints all string representation of all instances based or not on the class name.\n')
+        print('Prints string rep of all instances\n')
 
     def help_update(self):
         """ Desc. on update """
-        print('Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file)\n')
-    
+        print('Updates an instance based on the class name and id\n')
+
     def default(self, inp):
         """ Commandsn """
         if inp == 'quit':

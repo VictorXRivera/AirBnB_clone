@@ -41,4 +41,21 @@ EOF  help  quit\
 $
 ---
 # Files:
-- insert files
+- AUTHORS
+- console.py
+- tests
+	- __init__.py
+	- test_models
+		- __init__.py
+		- test_base_model.py
+- models
+	- __init__.py
+	- amenity.py
+	- base_model.py
+	- city.py
+	- place.py
+	- review.py
+	- state.py
+	- user.py
+	- engine
+		- file_storage.py
