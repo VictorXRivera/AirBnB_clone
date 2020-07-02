@@ -5,6 +5,9 @@ import cmd
 class HBNBCommand(cmd.Cmd):
     """ Class HBNBCommand """
     prompt = '(hbnb) '
+    classes = {"BaseModel": BaseModel, "User": User, "State": State,
+               "City": City, "Amenity": Amenity, "Place": Place,
+               "Review": Review}
 
     def do_quit(self, inp):
         """ Quit command """
@@ -13,9 +16,19 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, inp):
         """ Actual exiting """
         return True
-
+    
     def emptyline(self):
         """ Empty line edgecase? """
+        pass
+
+    def preloop(self):
+        """ Setup for json serialization and search by uid for deletion
+        """
+        return
+
+    def postloop(self):
+        """ Closes program and saves to JSON storage
+        """
         pass
 
     def help_quit(self):
@@ -43,9 +56,13 @@ class HBNBCommand(cmd.Cmd):
         print('Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file)\n')
     
     def default(self, inp):
-        """ Quit function """
+        """ Commandsn """
         if inp == 'quit':
             return self.do_quit(inp)
+        if inp == 'create':
+            return self.do_create
+        if new_instance == 'show':
+            return self.do_show
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
