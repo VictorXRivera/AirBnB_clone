@@ -6,11 +6,12 @@ import cmd
 
 class HBNBCommand(cmd.Cmd):
     """ Class HBNBCommand """
+
     classes = {'BaseModel': BaseModel, 'User': User,
-               'State': State
-               'City': City
-               'Amenity': Amenity
-               'Place': Place
+               'State': State,
+               'City': City,
+               'Amenity': Amenity,
+               'Place': Place,
                'Review': Review}
     prompt = '(hbnb) '
 

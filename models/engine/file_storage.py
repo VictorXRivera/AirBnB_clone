@@ -34,12 +34,12 @@ class FileStorage:
     def reload(self):
         '''reload: deserializess the JSON file to __objects
         '''
-        classes = {'BaseModel': BaseModel
-                   'User': User
-                   'State': State
-                   'City': City
-                   'Amenity': Amenity
-                   'Place': Place
+        classes = {'BaseModel': BaseModel,
+                   'User': User,
+                   'State': State,
+                   'City': City,
+                   'Amenity': Amenity,
+                   'Place': Place,
                    'Review': Review}
         try:
             with open(FileStorage.__file_path, 'r') as a_file:
