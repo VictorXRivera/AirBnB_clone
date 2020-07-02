@@ -1,6 +1,11 @@
 #!/usr/bin/python3
 """ file_storage: serializes/deserializes to/from a JSON file """
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 import json
 
 
@@ -27,25 +32,22 @@ class FileStorage:
             json.dump(obj_dict, a_file)
 
     def reload(self):
-        """ reload: deserializess the JSON file to __objects """
-        classes = {'BaseModel': BaseModel}
-        
+        '''reload: deserializess the JSON file to __objects
+        '''
+        classes = {'BaseModel': BaseModel,
+                   'User': User,
+                   'State': State,
+                   'City': City,
+                   'Amenity': Amenity,
+                   'Place': Place,
+                   'Review': Review}
         try:
-<<<<<<< HEAD
-            with open(self.__file_path, 'r') as a_file:
-=======
             with open(FileStorage.__file_path, 'r') as a_file:
->>>>>>> master
                 obj_dict = json.load(a_file)
             for key, val in obj_dict.items():
                 if val["__class__"] in classes.key():
                     FileStorage.__objects[key] = classes[val["__class__"]](**val)
-<<<<<<< HEAD
-            else:
-                FileStorage.__objects[key] = None
-=======
                 else:
                     FileStorage.__objects[key] = None
->>>>>>> master
         except:
             pass

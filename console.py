@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ Custom hbnb console """
+from models.user import User
 import cmd
 import inspect
 from models.base_model import BaseModel
@@ -14,12 +15,17 @@ from models import Storage
 import json
 
 
+
 class HBNBCommand(cmd.Cmd):
     """ Class HBNBCommand """
-    prompt = '(hbnb) '
-    classes = {"BaseModel": Basemodel, "User": User, "State": State,
-               "City": City, "Amenity": Amenity, "Place": Place,
-               "Review": Review}
+
+    classes = {'BaseModel': BaseModel, 'User': User,
+               'State': State,
+               'City': City,
+               'Amenity': Amenity,
+               'Place': Place,
+               'Review': Review}
+    prompt = '(hbnb)
 
     def do_quit(self, inp):
         """ Quit command """
