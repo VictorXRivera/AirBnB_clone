@@ -11,7 +11,7 @@ import json
 
 
 class FileStorage:
-    """ FileStorage: serializes/deserializes to/from a JSON file to instances """
+    """ FileStorage: serialize/deserialize to/from a JSON file to instances"""
 
     __file_path = "file.json"
     __objects = {}
@@ -35,19 +35,19 @@ class FileStorage:
     def reload(self):
         '''reload: deserializess the JSON file to __objects
         '''
-        classes = {'BaseModel': BaseModel,
-                   'User': User,
-                   'State': State,
-                   'City': City,
-                   'Amenity': Amenity,
-                   'Place': Place,
-                   'Review': Review}
+        clas = {'BaseModel': BaseModel,
+                'User': User,
+                'State': State,
+                'City': City,
+                'Amenity': Amenity,
+                'Place': Place,
+                'Review': Review}
         try:
             with open(FileStorage.__file_path, 'r') as a_file:
                 obj_dict = json.load(a_file)
             for key, val in obj_dict.items():
-                if val["__class__"] in classes.key():
-                    FileStorage.__objects[key] = classes[val["__class__"]](**val)
+                if val["__class__"] in clas.key():
+                    FileStorage.__objects[key] = clas[val["__class__"]](**val)
                 else:
                     FileStorage.__objects[key] = None
         except:

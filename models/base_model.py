@@ -31,7 +31,7 @@ class BaseModel:
         '''__str__: returns the string representation
         '''
         return "[{}] ({}) {}".format(type(self).__name__,
-                                       self.id, self.__dict__)
+                                     self.id, self.__dict__)
 
     def save(self):
         '''save: updates the public instance attribute updated_at
