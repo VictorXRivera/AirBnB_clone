@@ -11,7 +11,7 @@ from models.state import State
 from models.review import Review
 from models.place import Place
 import shlex
-from models import Storage
+from models.engine.file_storage import FileStorage
 import json
 
 
@@ -25,7 +25,7 @@ class HBNBCommand(cmd.Cmd):
                'Amenity': Amenity,
                'Place': Place,
                'Review': Review}
-    prompt = '(hbnb)
+    prompt = '(hbnb) '
 
     def do_quit(self, inp):
         """ Quit command """
@@ -99,7 +99,7 @@ class HBNBCommand(cmd.Cmd):
             return
         dict_key = i[0] + "." + i[1]
         if dict_key in storage.all().keys():
-            storage.all()pop(dict_key)
+            storage.all().pop(dict_key)
             storage.save()
         else:
             print("** no instance found **")
