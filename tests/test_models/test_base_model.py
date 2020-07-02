@@ -15,7 +15,7 @@ class Test_base_model(unittest.TestCase):
         self.assertIsInstance(base.updated_at, datetime)
         self.assertIsInstance(base.id, str)
         self.assertIsInstance(UUID(base.id), UUID)
-    
+
     def test_str(self):
         base = BaseModel()
         string = "[{}] ({}) {}".format(type(base).__name__,

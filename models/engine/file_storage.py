@@ -35,12 +35,12 @@ class FileStorage:
         '''reload: deserializess the JSON file to __objects
         '''
         classes = {'BaseModel': BaseModel
-                   'User' : User
-                   'State' : State
-                   'City' : City
-                   'Amenity' : Amenity
+                   'User': User
+                   'State': State
+                   'City': City
+                   'Amenity': Amenity
                    'Place': Place
-                   'Review' : Review}
+                   'Review': Review}
         try:
             with open(FileStorage.__file_path, 'r') as a_file:
                 obj_dict = json.load(a_file)
