@@ -1,19 +1,18 @@
 #!/usr/bin/python3
 """ Custom hbnb console """
-from models.user import User
 import cmd
-import inspect
+import models
+import shlex
 from models.base_model import BaseModel
 from models.user import User
-from models.amenity import Amenity
+from datetime import datetime
 from models.city import City
 from models.state import State
-from models.review import Review
+from models.amenity import Amenity
 from models.place import Place
-import shlex
-from models.engine.file_storage import FileStorage
-import json
-
+from models.review import Review
+from models import storage
+import re
 
 class HBNBCommand(cmd.Cmd):
     """ Class HBNBCommand """
@@ -264,6 +263,8 @@ class HBNBCommand(cmd.Cmd):
                 self.do_update(new_args)
             if tokens[0] == 'count':
                 self.do_count(new_args)
+            if tokens[0] == 'quit':
+                self.do_quit(inp)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
