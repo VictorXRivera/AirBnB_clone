@@ -159,6 +159,164 @@ class HBNBCommand(cmd.Cmd):
             setattr(storage.all()[key], i[2], i[3])
         storage.all()[key].save()
 
+    def default(self, line):
+        """the all printer"""
+        l = line.split(".")
+        if len(l) != 2:
+            super().default(line)
+            return
+        if l[0] not in HBNBCommand.classes:
+            super().default(line)
+            return
+        if l[1] == "all()":
+            ret = []
+            printed = 0
+            print("[", end="")
+            for key in storage.all().keys():
+                # if key[0:len(l[0])] == l[0]:
+                if isinstance(storage.all()[key], HBNBCommand.classes[l[0]]):
+                    if printed == 1:
+                        print(", ", end="")
+                    ret.append(str(storage.all()[key]))
+                    print(storage.all()[key], end="")
+                    printed = 1
+            print("]")
+            return
+        if l[1] == "count()":
+            ret = 0
+            for key in storage.all().keys():
+                # if key[0:len(l[0])] == l[0]:
+                if isinstance(storage.all()[key], HBNBCommand.classes[l[0]]):
+                    ret += 1
+            print(ret)
+            return
+        if l[1][0:4] == "show":
+            if len(l[1][4:]) < 3:
+                print("** instance id missing **")
+                return
+            id = l[1][5:-1]
+            key = l[0] + "." + id
+            if key in storage.all().keys():
+                print(storage.all()[key])
+                return
+            else:
+                print("** no instance found **")
+                return
+        if l[1][0:7] == "destroy":
+            if len(l[1][7:]) < 3:
+                print("** instance id missing **")
+                return
+            id = l[1][8:-1]
+            key = l[0] + "." + id
+            if key in storage.all().keys():
+                storage.all().pop(key)
+                return
+            else:
+                print("** no instance found **")
+                return
+        if l[1][0:6] == "update":
+            if '{' in l[1]:
+                args = HBNBCommand.split_with_dict(l[1][7:-1])
+
+                if len(args) < 1:
+                    print("** instance id missing **")
+                    return
+                key = l[0] + "." + args[0]
+                if key not in storage.all().keys():
+                    print("** no instance found **")
+                    return
+                if len(args) < 2:
+                    print("** attribute name missing **")
+                    return
+                dict_string = ""
+                for char in args[1]:
+                    if char == "'":
+                        dict_string += '"'
+                    else:
+                        dict_string += char
+                attr_dict = json.loads(dict_string)
+                print(attr_dict)
+                for attr_key, value in attr_dict.items():
+                    if attr_key in storage.all()[key].to_dict().keys():
+                        setattr(storage.all()[key], attr_key,
+                                type(getattr(storage.all()[key],
+                                     attr_key))(value))
+                    else:
+                        setattr(storage.all()[key], attr_key, str(value))
+                    storage.all()[key].save()
+                return
+            else:
+                args = l[1][7:-1].split(", ")
+                for index in range(0, len(args)):
+                    if args[index][0] == '"' and args[index][-1] == '"':
+                        args[index] = args[index][1:-1]
+
+                if len(args[0]) == 0:
+                    print("** instance id missing **")
+                    return
+                key = l[0] + "." + args[0]
+                if key not in storage.all().keys():
+                    print("** no instance found **")
+                    return
+                if len(args) < 2:
+                    print("** attribute name missing **")
+                    return
+                if len(args) < 3:
+                    print("** value missing **")
+                    return
+                if args[1] in storage.all()[key].to_dict().keys():
+                    setattr(storage.all()[key], args[1],
+                            type(getattr(storage.all()[key],
+                                 args[1]))(args[2]))
+                else:
+                    setattr(storage.all()[key], args[1], args[2])
+                storage.all()[key].save()
+                return
+
+        super().default(line)
+
+    def split_with_dict(line):
+        """ Breaks a line into arguments using ', ' as a separator
+            while keeping a dictionary in one piece
+        """
+        args = []
+        index = 0
+        while index < len(line):
+            token = ""
+            if line[index] == '"':
+                while index < len(line):
+                    token += line[index]
+                    index += 1
+                    if line[index] == '"':
+                        token += line[index]
+                        index += 1
+                        args.append(token)
+                        break
+            elif line[index] == '{':
+                while index < len(line):
+                    token += line[index]
+                    index += 1
+                    if line[index] == '}':
+                        token += line[index]
+                        index += 1
+                        args.append(token)
+                        break
+            elif line[index] == ' ' or line[index] == ',':
+                index += 1
+            else:
+                while index < len(line):
+                    token += line[index]
+                    index += 1
+                    if line[index] == ' ' or line[index] == ',':
+                        index += 1
+                        args.append(token)
+                        break
+
+        for index in range(0, len(args)):
+                    if args[index][0] == '"' and args[index][-1] == '"':
+                        args[index] = args[index][1:-1]
+        return args
+
     def emptyline(self):
         """ Empty line edgecase? """
         pass
@@ -202,11 +360,6 @@ class HBNBCommand(cmd.Cmd):
         print('Updates an instance based \
         on the class name and id by adding or \
         updating attribute (save the change into the JSON file)\n')
-
-    def default(self, inp):
-        """ Commands """
-        if inp == 'quit':
-            return self.do_quit(inp)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
