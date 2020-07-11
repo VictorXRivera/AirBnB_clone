@@ -10,12 +10,12 @@ import json
 class BaseModel:
     """BaseModel: defines all commmon attributes/methods for other classes
     """
+
     def __init__(self, *args, **kwargs):
         """__init__: instantiation of id, created_at, and updated_at
         """
         if len(kwargs) != 0:
-            """ Use the dictionary to create an instance if given to program
-            """
+            """ Use the dictionary to create an instance if given to program """
             for key, value in kwargs.items():
                 if key == '__class__':
                     setattr(self, key, type(self))
