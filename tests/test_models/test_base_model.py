@@ -1,42 +1,46 @@
 #!/usr/bin/python3
-from models.base_model import BaseModel
-from models.engine.file_storage import FileStorage
-from datetime import datetime
-from uuid import UUID
+""" first unit testing file for basemodel """
+
+
 import unittest
+from models.base_model import BaseModel
+import uuid
+import json
+from datetime import datetime as dt
 
 
-class Test_base_model(unittest.TestCase):
+class TestBase(unittest.TestCase):
+    """ Unitests for BaseModel """
 
-    def test_init(self):
-        base = BaseModel()
-        self.assertIsInstance(base, BaseModel)
-        self.assertIsInstance(base.created_at, datetime)
-        self.assertIsInstance(base.updated_at, datetime)
-        self.assertIsInstance(base.id, str)
-        self.assertIsInstance(UUID(base.id), UUID)
+    def test_bm1(self):
+        """ Testing attributes """
+        b = BaseModel()
+        self.assertIsInstance(b, BaseModel)
+        self.assertIsInstance(b.created_at, dt)
+        self.assertIsInstance(b.updated_at, dt)
+        self.assertNotIsInstance(b.id, uuid.UUID)
+        self.assertIsInstance(b.id, str)
 
-    def test_str(self):
-        base = BaseModel()
-        string = "[{}] ({}) {}".format(type(base).__name__,
-                                       base.id, str(base.__dict__))
-        #fails becuase self.maxDiff is not set to none
-        self.assertEqual(str(base), string)
+    def test_bm2(self):
+        """ 2nd tests for BaseModel """
+        bm2 = BaseModel()
+        strep = "[{}] ({}) {}".format(type(bm2).__name__, bm2.id, bm2.__dict__)
+        self.assertEqual(str(bm2), strep)
 
-    def test_to_dict(self):
-        base = BaseModel()
-        base_str = "BaseModel"
-        dict_obj = base.to_dict()
-        obj_key = set(dict_obj.keys())
-        obj_key_2 = set(base.__dict__.keys())
-        self.assertTrue(obj_key_2.issubset(obj_key))
-        self.assertEqual(dict_obj["__class__"], base_str)
-        self.assertTrue("__class__" in obj_key)
-        self.assertIsInstance(dict_obj["created_at"], str)
-        self.assertIsInstance(dict_obj["updated_at"], str)
-        self.assertEqual(dict_obj["created_at"], base.updated_at.isoformat())
-        self.assertEqual(dict_obj["updated_at"], base.updated_at.isoformat())
-
-
-if __name__ == '__main__':
-    unittest.main()
+    def test_bm3(self):
+        """ Test for conversion to dictionary"""
+        bm3 = BaseModel()
+        cdict = {}
+        cdict['__class__'] = "BaseModel"
+        cdict["created_at"] = str(bm3.created_at.isoformat())
+        cdict["updated_at"] = str(bm3.updated_at.isoformat())
+        cdict["id"] = bm3.id
+        self.assertEqual(cdict, bm3.to_dict())
+    
+    def test_save(self):
+        """ Testing save """
+        bm4 = BaseModel()
+        old_update_at = bm4.updated_at
+        bm4.save()
+        new_updated_at = bm4.updated_at
+        self.assertNotEqual(old_update_at, new_updated_at)
