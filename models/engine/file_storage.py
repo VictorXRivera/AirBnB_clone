@@ -22,33 +22,44 @@ class FileStorage:
 
     def new(self, obj):
         """ new: sets in __objects the obj with key <obj class name>.id """
-        self.__objects[type(obj).__name__ + '.' + obj.id] = obj
+        self.__objects[type(obj).__name__ + "." + obj.id] = obj
 
     def save(self):
         """ save: serializes __objects to the JSON file """
         obj_dict = {}
         for key, value in self.__objects.items():
-            obj_dict.append(value.todict())
+            obj_dict.append(value.to_dict())
         with open(self.__file_path, 'w+') as a_file:
             json.dump(obj_dict, a_file)
 
     def reload(self):
-        '''reload: deserializess the JSON file to __objects
-        '''
-        clas = {'BaseModel': BaseModel,
-                'User': User,
-                'State': State,
-                'City': City,
-                'Amenity': Amenity,
-                'Place': Place,
-                'Review': Review}
+        """reload: deserializess the JSON file to __objects
+        """
         try:
-            with open(FileStorage.__file_path, 'r') as a_file:
-                obj_dict = json.load(a_file)
-            for key, val in obj_dict.items():
-                if val["__class__"] in clas.key():
-                    FileStorage.__objects[key] = clas[val["__class__"]](**val)
-                else:
-                    FileStorage.__objects[key] = None
+            with open(self.__file_path, "r") as file:
+                list_of_dicts = json.loads(file.read())
+
+            for obj_dict in list_of_dicts:
+                if obj_dict['__class__'] == "BaseModel":
+                    from models.base_model import BaseModel
+                    self.new(BaseModel(**obj_dict))
+                if obj_dict['__class__'] == "User":
+                    from models.user import User
+                    self.new(User(**obj_dict))
+                if obj_dict['__class__'] == "City":
+                    from models.city import City
+                    self.new(City(**obj_dict))
+                if obj_dict['__class__'] == "Amenity":
+                    from models.amenity import Amenity
+                    self.new(Amenity(**obj_dict))
+                if obj_dict['__class__'] == "State":
+                    from models.state import State
+                    self.new(State(**obj_dict))
+                if obj_dict['__class__'] == "Place":
+                    from models.place import Place
+                    self.new(Place(**obj_dict))
+                if obj_dict['__class__'] == "Review":
+                    from models.review import Review
+                    self.new(Review(**obj_dict))
         except:
             pass
