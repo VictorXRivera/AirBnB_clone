@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """ Basemodel class """
+
+
 from datetime import datetime as dt
 import uuid
 import json
@@ -34,23 +36,22 @@ class BaseModel:
     def __str__(self):
         '''__str__: returns the string representation
         '''
-        return ("[{}] ({}) {}".format(type(self).__name__,
-                                     self.id, self.__dict__))
+        return ("[{}] ({}) {}".format(type(self).__name__, self.id,
+                                      self.__dict__))
 
     def save(self):
         '''save: updates the public instance attribute updated_at
         '''
-        from models.__init__ import storage
         self.updated_at = dt.now()
+        from models.__init__ import storage
         storage.save()
 
     def to_dict(self):
         '''to_dict: returns a dictionary containing all keys/value
         of __dict__ of the instance'''
         new_dict = {}
-
         for key, value in self.__dict__.items():
-            if key == "created_at" or key == "updated_at":
+            if key == 'created_at' or key == 'updated_at':
                 new_dict[key] = value.isoformat()
             else:
                 new_dict[key] = value
